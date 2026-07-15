@@ -1,6 +1,120 @@
 (function () {
   'use strict';
 
+  /* ========== LGPD + Google Tag Manager ========== */
+  var GTM_ID = 'GTM-WFS2866M';
+  var CONSENT_KEY = 'projetovida_lgpd_consent';
+  var gtmLoaded = false;
+
+  function loadGoogleTagManager() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js',
+    });
+
+    var firstScript = document.getElementsByTagName('script')[0];
+    var gtmScript = document.createElement('script');
+    gtmScript.async = true;
+    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+    firstScript.parentNode.insertBefore(gtmScript, firstScript);
+
+    var noscriptHost = document.getElementById('gtm-noscript');
+    if (noscriptHost && !noscriptHost.querySelector('iframe')) {
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.googletagmanager.com/ns.html?id=' + GTM_ID;
+      iframe.height = '0';
+      iframe.width = '0';
+      iframe.style.display = 'none';
+      iframe.style.visibility = 'hidden';
+      iframe.title = 'Google Tag Manager';
+      noscriptHost.appendChild(iframe);
+    }
+  }
+
+  function getConsent() {
+    try {
+      return localStorage.getItem(CONSENT_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function setConsent(value) {
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+    } catch (error) {
+      // Ignore storage errors (modo privado / restrições)
+    }
+  }
+
+  function showLgpdBanner() {
+    var banner = document.getElementById('lgpdBanner');
+    if (banner) banner.hidden = false;
+  }
+
+  function hideLgpdBanner() {
+    var banner = document.getElementById('lgpdBanner');
+    if (banner) banner.hidden = true;
+  }
+
+  function applyConsent(value) {
+    setConsent(value);
+    hideLgpdBanner();
+
+    if (value === 'accepted') {
+      loadGoogleTagManager();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lgpd_consent_accepted' });
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'lgpd_consent_rejected' });
+
+    // Se o GTM já estava ativo, recarrega para interromper a captura
+    if (gtmLoaded) {
+      window.location.reload();
+    }
+  }
+
+  function initLgpdConsent() {
+    var consent = getConsent();
+    var acceptBtn = document.getElementById('lgpdAcceptBtn');
+    var rejectBtn = document.getElementById('lgpdRejectBtn');
+    var manageBtn = document.getElementById('lgpdManageBtn');
+
+    if (consent === 'accepted') {
+      loadGoogleTagManager();
+    } else if (!consent) {
+      showLgpdBanner();
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function () {
+        applyConsent('accepted');
+      });
+    }
+
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', function () {
+        applyConsent('rejected');
+      });
+    }
+
+    if (manageBtn) {
+      manageBtn.addEventListener('click', function () {
+        showLgpdBanner();
+      });
+    }
+  }
+
+  initLgpdConsent();
+
+  /* ========== Header / navegação ========== */
   const header = document.querySelector('.site-header');
 
   function updateHeaderShadow() {
@@ -57,11 +171,13 @@
     '<style>.is-visible { opacity: 1 !important; transform: translateY(0) !important; }</style>'
   );
 
+  /* ========== Formulário de colaboração ========== */
   const form = document.getElementById('colaborarForm');
   if (!form) return;
 
   const submitBtn = document.getElementById('colaborarSubmit');
   const feedback = document.getElementById('colaborarFeedback');
+  const lgpdCheckbox = document.getElementById('colaborarLgpd');
   const btnText = submitBtn.querySelector('.btn-colaborar-text');
   const btnLoading = submitBtn.querySelector('.btn-colaborar-loading');
 
@@ -98,6 +214,13 @@
     event.preventDefault();
     hideFeedback();
 
+    if (!lgpdCheckbox || !lgpdCheckbox.checked) {
+      form.classList.add('was-validated');
+      showFeedback('error', 'Marque a autorização de tratamento de dados (LGPD) para continuar.');
+      if (lgpdCheckbox) lgpdCheckbox.focus();
+      return;
+    }
+
     if (!form.checkValidity()) {
       form.classList.add('was-validated');
       return;
@@ -109,13 +232,21 @@
     const userMessage = form.elements.namedItem('message').value.trim();
 
     const formData = new FormData(form);
+    formData.delete('lgpd_consent');
+    formData.delete('botcheck');
     formData.append('access_key', 'f5115f3d-7093-4f5b-9d50-778e1f769a95');
     formData.append('subject', 'Nova colaboração: ' + interestLabel);
     formData.append('from_name', 'Site Projeto Vida');
     formData.set('interest', interestLabel);
     formData.set(
       'message',
-      ['Área de interesse: ' + interestLabel, 'Telefone: ' + phone, '', userMessage || 'Nenhuma mensagem adicional.'].join('\n')
+      [
+        'Área de interesse: ' + interestLabel,
+        'Telefone: ' + phone,
+        'Consentimento LGPD: aceito',
+        '',
+        userMessage || 'Nenhuma mensagem adicional.',
+      ].join('\n')
     );
 
     setLoading(true);
