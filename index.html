@@ -40,6 +40,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="#bazar">Bazar beneficiente</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#colaborar">Colaborar</a>
+              </li>
             </ul>
             <a href="#apadrinhar" class="btn btn-header-apadrinhar">QUERO APADRINHAR</a>
           </div>
@@ -216,7 +219,56 @@
           </div>
           <div class="row align-items-center g-4 g-lg-5">
             <div class="col-lg-6 order-lg-1">
-              <img src="assets/images/apadrinhar.jpg" alt="Apadrinhamento de Natal" class="img-fluid section-image rounded-4 shadow" />
+              <div id="apadrinharCarousel" class="carousel slide apadrinhar-carousel rounded-4 shadow" data-bs-ride="carousel" data-bs-interval="3500">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                  <button type="button" data-bs-target="#apadrinharCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                </div>
+                <div class="carousel-inner rounded-4">
+                  <div class="carousel-item active">
+                    <img src="assets/images/apadrinhamento/img-1.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 1" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-2.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 2" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-3.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 3" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-4.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 4" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-5.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 5" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-6.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 6" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-7.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 7" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-8.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 8" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/images/apadrinhamento/img-9.jpeg" class="d-block w-100 section-image" alt="Apadrinhamento de Natal - foto 9" />
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#apadrinharCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#apadrinharCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Próxima</span>
+                </button>
+              </div>
             </div>
             <div class="col-lg-6 order-lg-2">
               <p class="section-text">
@@ -244,6 +296,120 @@
                 rel="noopener noreferrer"
                 >QUERO SER UM PADRINHO(A)</a
               >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colaborar -->
+      <section id="colaborar" class="section-colaborar py-5">
+        <div class="container py-lg-4">
+          <div class="section-title mb-3">
+            <i class="bi bi-heart-fill section-icon"></i>
+            <h2>DESEJA COLABORAR DE ALGUMA FORMA?</h2>
+          </div>
+          <p class="section-text colaborar-intro mb-4">
+            Toda ajuda faz diferença. Seja como padrinho, doador, voluntário ou parceiro, você pode contribuir com o
+            trabalho do CCA Projeto Vida. Preencha o formulário abaixo e nossa equipe entrará em contato.
+          </p>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <form id="colaborarForm" class="colaborar-form" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="colaborarNome" class="form-label">Nome completo</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="colaborarNome"
+                      name="name"
+                      placeholder="Seu nome"
+                      autocomplete="name"
+                      required
+                      minlength="2"
+                      maxlength="120" />
+                    <div class="invalid-feedback">Informe seu nome completo.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="colaborarEmail" class="form-label">E-mail</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="colaborarEmail"
+                      name="email"
+                      placeholder="seuemail@exemplo.com"
+                      autocomplete="email"
+                      required
+                      maxlength="120" />
+                    <div class="invalid-feedback">Informe um e-mail válido.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="colaborarTelefone" class="form-label">Telefone / WhatsApp</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="colaborarTelefone"
+                      name="phone"
+                      placeholder="(11) 90000-0000"
+                      autocomplete="tel"
+                      required
+                      minlength="8"
+                      maxlength="20" />
+                    <div class="invalid-feedback">Informe um telefone válido.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="colaborarInteresse" class="form-label">Área de interesse</label>
+                    <select class="form-select" id="colaborarInteresse" name="interest" required>
+                      <option value="" selected disabled>Selecione uma opção</option>
+                      <option value="apadrinhamento">Apadrinhamento de Natal</option>
+                      <option value="bazar">Doação para o Bazar Beneficente</option>
+                      <option value="voluntariado">Quero ser voluntário(a)</option>
+                      <option value="oficinas">Oficinas e projetos (esporte, música, arte, cultura)</option>
+                      <option value="doacao_financeira">Doação financeira / patrocínio</option>
+                      <option value="parceria">Parceria empresarial / institucional</option>
+                      <option value="materiais">Doação de materiais e equipamentos</option>
+                      <option value="outros">Outros</option>
+                    </select>
+                    <div class="invalid-feedback">Selecione uma área de interesse.</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="colaborarMensagem" class="form-label">Mensagem <span class="text-muted fw-normal">(opcional)</span></label>
+                    <textarea
+                      class="form-control"
+                      id="colaborarMensagem"
+                      name="message"
+                      rows="4"
+                      maxlength="1000"
+                      placeholder="Conte-nos como gostaria de contribuir ou deixe alguma observação."></textarea>
+                  </div>
+
+                  <!-- Honeypot anti-spam (não preencher) -->
+                  <div class="colaborar-honeypot" aria-hidden="true">
+                    <label for="colaborarBotcheck">Não preencha este campo</label>
+                    <input type="text" id="colaborarBotcheck" name="botcheck" tabindex="-1" autocomplete="off" />
+                  </div>
+
+                  <div class="col-12">
+                    <div id="colaborarFeedback" class="colaborar-feedback d-none" role="status" aria-live="polite"></div>
+                  </div>
+
+                  <div class="col-12 d-flex flex-column flex-sm-row align-items-sm-center gap-3">
+                    <button type="submit" class="btn btn-colaborar" id="colaborarSubmit">
+                      <span class="btn-colaborar-text">ENVIAR MENSAGEM</span>
+                      <span class="btn-colaborar-loading d-none">
+                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Enviando...
+                      </span>
+                    </button>
+                    <p class="colaborar-privacy mb-0">Seus dados serão usados apenas para retorno do nosso contato.</p>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -316,6 +482,7 @@
               <li><a href="#projetos">Projetos</a></li>
               <li><a href="#bazar">Bazar beneficiente</a></li>
               <li><a href="#apadrinhar">Apadrinhamento</a></li>
+              <li><a href="#colaborar">Colaborar</a></li>
             </ul>
           </div>
           <div class="col-lg-4">
