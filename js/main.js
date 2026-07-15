@@ -1,15 +1,28 @@
 (function () {
   'use strict';
 
-  /* ========== LGPD + Google Tag Manager ========== */
+  /* ========== LGPD + Google Tag Manager / Analytics ========== */
   var GTM_ID = 'GTM-WFS2866M';
+  var GA_ID = 'G-5NJ31BE0PE';
   var CONSENT_KEY = 'projetovida_lgpd_consent';
-  var gtmLoaded = false;
+  var trackingLoaded = false;
+
+  function loadGoogleAnalytics() {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID);
+
+    var firstScript = document.getElementsByTagName('script')[0];
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    firstScript.parentNode.insertBefore(gaScript, firstScript);
+  }
 
   function loadGoogleTagManager() {
-    if (gtmLoaded) return;
-    gtmLoaded = true;
-
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       'gtm.start': new Date().getTime(),
@@ -33,6 +46,13 @@
       iframe.title = 'Google Tag Manager';
       noscriptHost.appendChild(iframe);
     }
+  }
+
+  function loadTrackingTags() {
+    if (trackingLoaded) return;
+    trackingLoaded = true;
+    loadGoogleTagManager();
+    loadGoogleAnalytics();
   }
 
   function getConsent() {
@@ -66,7 +86,7 @@
     hideLgpdBanner();
 
     if (value === 'accepted') {
-      loadGoogleTagManager();
+      loadTrackingTags();
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'lgpd_consent_accepted' });
       return;
@@ -75,8 +95,8 @@
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'lgpd_consent_rejected' });
 
-    // Se o GTM já estava ativo, recarrega para interromper a captura
-    if (gtmLoaded) {
+    // Se o rastreamento já estava ativo, recarrega para interromper a captura
+    if (trackingLoaded) {
       window.location.reload();
     }
   }
@@ -88,7 +108,7 @@
     var manageBtn = document.getElementById('lgpdManageBtn');
 
     if (consent === 'accepted') {
-      loadGoogleTagManager();
+      loadTrackingTags();
     } else if (!consent) {
       showLgpdBanner();
     }
