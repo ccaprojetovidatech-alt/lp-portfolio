@@ -557,6 +557,125 @@ h1, h2, h3, h4, h5, h6,HHHHHHHHH
   overflow: hidden;
 }
 
+.colaborar-lgpd-check {
+  padding: 0.9rem 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.55rem;
+}
+
+.colaborar-lgpd-check .form-check-input {
+  margin-top: 0.35rem;
+  cursor: pointer;
+}
+
+.colaborar-lgpd-check .form-check-label {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* LGPD Cookie Banner */
+.lgpd-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1080;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.lgpd-banner[hidden] {
+  display: none !important;
+}
+
+.lgpd-banner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.lgpd-banner-title {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 0.4rem;
+}
+
+.lgpd-banner-text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 760px;
+}
+
+.lgpd-banner-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.65rem;
+}
+
+.btn-lgpd-accept,
+.btn-lgpd-reject {
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  padding: 0.65rem 1.15rem;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-lgpd-accept {
+  background-color: var(--blue-primary);
+  color: #fff;
+}
+
+.btn-lgpd-accept:hover,
+.btn-lgpd-accept:focus {
+  background-color: var(--blue-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-lgpd-reject {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.btn-lgpd-reject:hover,
+.btn-lgpd-reject:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.lgpd-manage-link {
+  display: inline;
+  margin-left: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lgpd-manage-link:hover {
+  color: #fff;
+}
+
 /* Footer */
 .site-footer {
   background-color: var(--blue-footer);
@@ -729,5 +848,20 @@ h1, h2, h3, h4, h5, h6,HHHHHHHHH
 
   .site-logo {
     height: 44px;
+  }
+
+  .lgpd-banner-inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .lgpd-banner-actions {
+    width: 100%;
+  }
+
+  .btn-lgpd-accept,
+  .btn-lgpd-reject {
+    flex: 1;
   }
 }
